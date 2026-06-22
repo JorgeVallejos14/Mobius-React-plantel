@@ -8,3 +8,7 @@ Prompt: "recibe props con name, position, number, status. Mostrar nombre, posici
 Resultado: yo cree la carpeta de components con playercard.jsx y con ayuda de copilot me hizo las tarjetas de los jugadores y su disponibilidad.
 Utilidad: útil
 
+=== Etapa 3 ===
+Prompt: "Modifica el estado de los jugadores usando useState(), crear el objeto: {1: "Disponible", 2:"Disponible", 3: "Disponible"}, crear función: handleStatusChange(id), rotar estados: disponible -> lesionado -> suspendido -> disponible y que al hacer click en la tarjeta debe cambiar el estado."
+Resultado: Modifico el control de estado y también agrego la rotación de disponibilidad del jugador.
+Utilidad: útil

@@ -1,8 +1,31 @@
+import { useState } from "react";
 import { players } from "./data/players";
 import PlayerCard from "./components/PlayerCard";
 
 function App() {
-	console.log(players);
+	const [playerStatuses, setPlayerStatuses] = useState({
+		1: "Disponible",
+		2: "Disponible",
+		3: "Disponible",
+		4: "Disponible",
+		5: "Disponible"
+	});
+
+	const handleStatusChange = (id) => {
+		setPlayerStatuses((currentStatuses) => {
+			const currentStatus = currentStatuses[id] ?? "Disponible";
+			const nextStatusMap = {
+				Disponible: "Lesionado",
+				Lesionado: "Suspendido",
+				Suspendido: "Disponible"
+			};
+
+			return {
+				...currentStatuses,
+				[id]: nextStatusMap[currentStatus] ?? "Disponible"
+			};
+		});
+	};
 
 	return (
 		<main style={{ padding: 24 }}>
@@ -15,7 +38,12 @@ function App() {
 				}}
 			>
 				{players.map((player) => (
-					<PlayerCard key={player.id} {...player} />
+					<PlayerCard
+						key={player.id}
+						{...player}
+						status={playerStatuses[player.id] ?? "Disponible"}
+						onClick={() => handleStatusChange(player.id)}
+					/>
 				))}
 			</section>
 		</main>
