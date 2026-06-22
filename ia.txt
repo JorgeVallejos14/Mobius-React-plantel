@@ -1,0 +1,5 @@
+=== Etapa 1 ===
+Prompt: "Importa players.js aca en app.jsx y muestra los datos con console.log(players);"
+Resultado: me generó la estructura con el titulo pero yo cree la carpeta data con players.js.
+Utilidad: útil.
+
