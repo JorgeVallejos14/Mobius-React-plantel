@@ -1,17 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { players } from "./data/players";
 import PlayerCard from "./components/PlayerCard";
+import TeamSummary from "./components/TeamSummary";
+
+const defaultPlayerStatuses = {
+	1: "Disponible",
+	2: "Disponible",
+	3: "Disponible",
+	4: "Disponible",
+	5: "Disponible"
+};
 
 function App() {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [statusFilter, setStatusFilter] = useState("todos");
-	const [playerStatuses, setPlayerStatuses] = useState({
-		1: "Disponible",
-		2: "Disponible",
-		3: "Disponible",
-		4: "Disponible",
-		5: "Disponible"
+	const [playerStatuses, setPlayerStatuses] = useState(() => {
+		const savedStatuses = localStorage.getItem("playerStatuses");
+
+		if (!savedStatuses) {
+			return defaultPlayerStatuses;
+		}
+
+		try {
+			return {
+				...defaultPlayerStatuses,
+				...JSON.parse(savedStatuses)
+			};
+		} catch {
+			return defaultPlayerStatuses;
+		}
 	});
+
+	useEffect(() => {
+		localStorage.setItem("playerStatuses", JSON.stringify(playerStatuses));
+	}, [playerStatuses]);
 
 	const handleStatusChange = (id) => {
 		setPlayerStatuses((currentStatuses) => {
@@ -43,9 +65,29 @@ function App() {
 		return matchesSearch && matchesStatus;
 	});
 
+	const availablePlayers = players.filter(
+		(player) => (playerStatuses[player.id] ?? "Disponible") === "Disponible"
+	).length;
+	const injuredPlayers = players.filter(
+		(player) => (playerStatuses[player.id] ?? "Disponible") === "Lesionado"
+	).length;
+	const suspendedPlayers = players.filter(
+		(player) => (playerStatuses[player.id] ?? "Disponible") === "Suspendido"
+	).length;
+	const availablePercentage = Math.round(
+		(players.length > 0 ? (availablePlayers / players.length) * 100 : 0)
+	);
+
 	return (
 		<main style={{ padding: 24 }}>
 			<h1>Mobius FC</h1>
+			<TeamSummary
+				totalPlayers={players.length}
+				availablePlayers={availablePlayers}
+				injuredPlayers={injuredPlayers}
+				suspendedPlayers={suspendedPlayers}
+				availablePercentage={availablePercentage}
+			/>
 			<section style={{ display: "grid", gap: 12, marginBottom: 20 }}>
 				<input
 					type="text"

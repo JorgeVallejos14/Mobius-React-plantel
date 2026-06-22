@@ -16,6 +16,11 @@ Utilidad: útil
 === Etapa 4 ===
 Prompt: "Buscar y filtrar jugadores lo primero es crear un input (<input />), guardar busqueda con useState(), filtrar por nombre y numero, agregar botones: todos, disponibles, lesionados y suspendidos, aplicar ambos filtros simultaneamente y mostrar cantidad visible como ejemplo: jugadores visibles: 3"
 Prompt de ajuste: "un pequeño ajuste y es que en los botones de todos, disponibles, lesionados y suspendidos estan en letras blancas y no es visible. puedes cambiar el color de las letras a negras."
-Resultado: Me generó la infraestructura de los filtros pero le tuve que pedir la correción de las letras que salieron de color blancos y no eran visibles.
+Resultado: Me generó la infraestructura de los filtros y busquedas pero le tuve que pedir la correción de las letras que salieron de color blancos y no eran visibles.
 Utilidad: Parcialmente útil
 
+=== Etapa 5 ===
+Prompt: "En guardar información y mostrar estadisticas el primer paso es mostrar total jugadores, disponibles, lesionados, suspendidos y porcentaje disponibles, usar useEffect() para guardar en LocalStorage y crear otro useEffect para recuperar datos al cargar."
+Prompt de ajuste: "Ojo que al recargar la pagina el estado se mantenga"
+Resultado: Me generó la infraestructura final de la mostración de la estadisticas pero no genero bien la parte que al recargar la pagina no se perdiese lo seleccionado, le pedi el arreglo y aplico el ajuste.
+Utilidad: Parcialmente útil
