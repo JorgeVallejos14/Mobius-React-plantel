@@ -3,3 +3,8 @@ Prompt: "Importa players.js aca en app.jsx y muestra los datos con console.log(p
 Resultado: me generó la estructura con el titulo pero yo cree la carpeta data con players.js.
 Utilidad: útil.
 
+=== Etapa 2 ===
+Prompt: "recibe props con name, position, number, status. Mostrar nombre, posición y numero. Aplicar colores: disponible = verde, lesionado = rojo y suspendido = amarillo y renderiza al menos 5 jugadores usando map()."
+Resultado: yo cree la carpeta de components con playercard.jsx y con ayuda de copilot me hizo las tarjetas de los jugadores y su disponibilidad.
+Utilidad: útil
+
