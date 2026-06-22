@@ -12,3 +12,10 @@ Utilidad: útil
 Prompt: "Modifica el estado de los jugadores usando useState(), crear el objeto: {1: "Disponible", 2:"Disponible", 3: "Disponible"}, crear función: handleStatusChange(id), rotar estados: disponible -> lesionado -> suspendido -> disponible y que al hacer click en la tarjeta debe cambiar el estado."
 Resultado: Modifico el control de estado y también agrego la rotación de disponibilidad del jugador.
 Utilidad: útil
+
+=== Etapa 4 ===
+Prompt: "Buscar y filtrar jugadores lo primero es crear un input (<input />), guardar busqueda con useState(), filtrar por nombre y numero, agregar botones: todos, disponibles, lesionados y suspendidos, aplicar ambos filtros simultaneamente y mostrar cantidad visible como ejemplo: jugadores visibles: 3"
+Prompt de ajuste: "un pequeño ajuste y es que en los botones de todos, disponibles, lesionados y suspendidos estan en letras blancas y no es visible. puedes cambiar el color de las letras a negras."
+Resultado: Me generó la infraestructura de los filtros pero le tuve que pedir la correción de las letras que salieron de color blancos y no eran visibles.
+Utilidad: Parcialmente útil
+

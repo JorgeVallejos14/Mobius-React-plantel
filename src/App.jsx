@@ -3,6 +3,8 @@ import { players } from "./data/players";
 import PlayerCard from "./components/PlayerCard";
 
 function App() {
+	const [searchTerm, setSearchTerm] = useState("");
+	const [statusFilter, setStatusFilter] = useState("todos");
 	const [playerStatuses, setPlayerStatuses] = useState({
 		1: "Disponible",
 		2: "Disponible",
@@ -27,9 +29,66 @@ function App() {
 		});
 	};
 
+	const visiblePlayers = players.filter((player) => {
+		const playerStatus = playerStatuses[player.id] ?? "Disponible";
+		const normalizedSearch = searchTerm.trim().toLowerCase();
+		const matchesSearch =
+			normalizedSearch === "" ||
+			player.name.toLowerCase().includes(normalizedSearch) ||
+			String(player.number).includes(normalizedSearch);
+		const matchesStatus =
+			statusFilter === "todos" ||
+			playerStatus.toLowerCase() === statusFilter;
+
+		return matchesSearch && matchesStatus;
+	});
+
 	return (
 		<main style={{ padding: 24 }}>
 			<h1>Mobius FC</h1>
+			<section style={{ display: "grid", gap: 12, marginBottom: 20 }}>
+				<input
+					type="text"
+					value={searchTerm}
+					onChange={(event) => setSearchTerm(event.target.value)}
+					placeholder="Buscar por nombre o número"
+					style={{
+						padding: 12,
+						borderRadius: 12,
+						border: "1px solid #cbd5e1",
+						fontSize: 16
+					}}
+				/>
+				<div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+					{[
+						{ label: "Todos", value: "todos" },
+						{ label: "Disponibles", value: "disponible" },
+						{ label: "Lesionados", value: "lesionado" },
+						{ label: "Suspendidos", value: "suspendido" }
+					].map((option) => (
+						<button
+							key={option.value}
+							type="button"
+							onClick={() => setStatusFilter(option.value)}
+							style={{
+								padding: "10px 14px",
+								borderRadius: 999,
+								border:
+									statusFilter === option.value
+										? "2px solid #111827"
+										: "1px solid #cbd5e1",
+								backgroundColor:
+									statusFilter === option.value ? "#e5e7eb" : "#fff",
+								color: "#000",
+								cursor: "pointer"
+							}}
+						>
+							{option.label}
+						</button>
+					))}
+				</div>
+				<p style={{ margin: 0 }}>Jugadores visibles: {visiblePlayers.length}</p>
+			</section>
 			<section
 				style={{
 					display: "grid",
@@ -37,7 +96,7 @@ function App() {
 					gap: 16
 				}}
 			>
-				{players.map((player) => (
+				{visiblePlayers.map((player) => (
 					<PlayerCard
 						key={player.id}
 						{...player}
